@@ -1,0 +1,45 @@
+# Mayhem by https://forallsecure.com
+# Mayhemfile: configuration file for testing your target with Mayhem
+# Format: YAML 1.1
+
+# Project name that the target belongs to
+project: baptistapedro/ossim-fuzzer
+
+# Target name (should be unique within the project)
+target: ossim-fuzzer-2
+
+# Base image to run the binary in.
+image: index.docker.io/pedbap/ossim-fuzzer@sha256:2a9c7a6d5862592a1cef80dffbec6d60446ddf0f77e741b3c2404259d865fa04
+
+# Turns on extra test case processing (completing a run will take longer)
+advanced_triage: false
+
+# List of commands used to test the target
+cmds:
+
+  # Command used to start the target, "@@" is the input file
+  # (when "@@" is omitted Mayhem defaults to stdin inputs)
+  - cmd: /ossim/bin/ossim-cli info -p -i @@
+    env: {}
+
+    ## Uncomment to change default dir (/) from which the target is invoked
+    #cwd: /
+
+    ## If this is a network target, uncomment the block below and remove
+    ## the @@ input file reference in the cmd (you can either test network or
+    ## file inputs, not both).
+    #network:
+    ## Use "127.0.0.1" instead of "localhost" below if you want to test only
+    ## for IPv4. For IPv6, use "[::1]". By leaving as "localhost", Mayhem will
+    ## attempt to autodetect the one used by the target.
+    #  url: tcp://localhost:8080  # protocol, host and port to analyze
+    #  client: False           # target is a client-side program
+    #  timeout: 2.0               # max seconds for sending data
+
+    ## Max test case length (in bytes) to be taken into account. Test cases over
+    ## that length will be truncated. Be very careful about increasing this
+    ## limit as it can severely affect your fuzzer performance.
+    # max_length: 8192
+
+testsuite:
+  - https://mayhem.forallsecure.com/baptistapedro/ossim-fuzzer/ossim-fuzzer-2/testsuite.tar
