@@ -9,7 +9,7 @@ project: baptistapedro/ossim-fuzzer
 target: ossim-fuzzer-2
 
 # Base image to run the binary in.
-image: index.docker.io/pedbap/ossim-fuzzer@sha256:2a9c7a6d5862592a1cef80dffbec6d60446ddf0f77e741b3c2404259d865fa04
+image: pedbap/ossim-fuzzer:2
 
 # Turns on extra test case processing (completing a run will take longer)
 advanced_triage: false
@@ -40,6 +40,3 @@ cmds:
     ## that length will be truncated. Be very careful about increasing this
     ## limit as it can severely affect your fuzzer performance.
     # max_length: 8192
-
-testsuite:
-  - https://mayhem.forallsecure.com/baptistapedro/ossim-fuzzer/ossim-fuzzer-2/testsuite.tar
